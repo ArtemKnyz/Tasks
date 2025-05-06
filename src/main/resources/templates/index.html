@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -15,8 +15,10 @@
     <h1 class="text-center">Список дел</h1>
     <form th:action="@{/add}" th:object="${newTodo}" method="post" class="mb-3">
         <div class="input-group mb-2">
-            <input type="text" class="form-control" th:field="*{title}" placeholder="Задача" required>
-            <input type="date" class="form-control" th:field="*{date}" required>
+            <label for="title" class="visually-hidden">Задача</label>
+            <input type="text" id="title" class="form-control" th:field="*{title}" placeholder="Задача" required>
+            <label for="date" class="visually-hidden">Дата</label>
+            <input type="date" id="date" class="form-control" th:field="*{date}" required>
             <button class="btn btn-primary" type="submit">Добавить</button>
         </div>
     </form>

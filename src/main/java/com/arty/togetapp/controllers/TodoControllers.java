@@ -57,7 +57,7 @@ public class TodoControllers implements CommandLineRunner {
 
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         todoItemRepository.save(TodoItem.builder().title("Написать письмо контрагенту").build());
         todoItemRepository.save(TodoItem.builder().title("Составить проект протокола совещания").build());
         todoItemRepository.save(TodoItem.builder().title("Оформить командировку").build());
