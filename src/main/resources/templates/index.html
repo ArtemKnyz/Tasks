@@ -13,10 +13,10 @@
 <body>
 <div class="container mt-5">
     <h1 class="text-center">Список дел</h1>
-
     <form th:action="@{/add}" th:object="${newTodo}" method="post" class="mb-3">
-        <div class="input-group">
-            <input type="text" class="form-control" th:field="*{title}" placeholder="Enter todo item">
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" th:field="*{title}" placeholder="Задача" required>
+            <input type="date" class="form-control" th:field="*{date}" required>
             <button class="btn btn-primary" type="submit">Добавить</button>
         </div>
     </form>
@@ -24,7 +24,12 @@
     <ul class="list-group">
         <li th:each="item, iterStat : ${allTodo}"
             class="list-group-item d-flex justify-content-between align-items-center">
-            <span th:text="${iterStat.count} + '. ' + ${item.title}"></span>
+
+        <span class="d-flex align-items-center gap-2">
+            <span class="badge bg-primary" th:text="${iterStat.count}"></span>
+            <span th:text="${item.date != null ? item.date + ' — ' + item.title : item.title}"></span>
+        </span>
+
             <form th:action="@{/delete}" method="post">
                 <input type="hidden" name="id" th:value="${item.id}">
                 <button type="submit" class="btn btn-danger btn-sm">Удалить</button>

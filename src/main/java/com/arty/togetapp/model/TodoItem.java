@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -16,6 +18,6 @@ public class TodoItem {
     @Id
     @GeneratedValue
     private Long id;
-
     private String title;
+    private LocalDate date;
 }

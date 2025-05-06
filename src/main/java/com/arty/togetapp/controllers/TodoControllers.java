@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -22,12 +23,21 @@ public class TodoControllers implements CommandLineRunner {
     }
 
     @GetMapping
-    public String index(Model model) {
+    public String index(@RequestParam(required = false) LocalDate filterDate, Model model) {
+        List<TodoItem> allTodos;
 
-        List<TodoItem> allTodos = todoItemRepository.findAll();
+        if (filterDate != null) {
+            allTodos = todoItemRepository.findByDate(filterDate);
+        } else {
+            allTodos = todoItemRepository.findAll();
+        }
 
         model.addAttribute("allTodo", allTodos);
-        model.addAttribute("newTodo", new TodoItem());
+        model.addAttribute("newTodo", TodoItem.builder()
+                .date(filterDate != null ? filterDate : LocalDate.now())
+                .build());
+        model.addAttribute("currentDate", filterDate);
+
         return "index";
     }
 
