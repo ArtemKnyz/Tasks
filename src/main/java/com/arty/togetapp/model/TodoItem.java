@@ -3,8 +3,14 @@ package com.arty.togetapp.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class TodoItem {
 
     @Id
@@ -12,28 +18,4 @@ public class TodoItem {
     private Long id;
 
     private String title;
-
-    public TodoItem() {
-    }
-
-    public TodoItem(String title) {
-        this.title = title;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }

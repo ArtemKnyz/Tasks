@@ -1,6 +1,5 @@
 package com.arty.togetapp.controllers;
 
-
 import com.arty.togetapp.model.TodoItem;
 import com.arty.togetapp.repositories.TodoItemRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,9 +24,6 @@ public class TodoControllers implements CommandLineRunner {
     @GetMapping
     public String index(Model model) {
 
-
-        //model.addAttribute("data", "Hello");
-
         List<TodoItem> allTodos = todoItemRepository.findAll();
 
         model.addAttribute("allTodo", allTodos);
@@ -40,10 +37,19 @@ public class TodoControllers implements CommandLineRunner {
         return "redirect:/";
     }
 
+    @PostMapping("/delete")
+    public String delete(@RequestParam Long id) {
+        if (id != null && todoItemRepository.existsById(id)) {
+            todoItemRepository.deleteById(id);
+        }
+        return "redirect:/";
+    }
+
 
     @Override
     public void run(String... args) throws Exception {
-        todoItemRepository.save(new TodoItem("Item test 1"));
-        todoItemRepository.save(new TodoItem("Item test 2"));
+        todoItemRepository.save(TodoItem.builder().title("Написать письмо контрагенту").build());
+        todoItemRepository.save(TodoItem.builder().title("Составить проект протокола совещания").build());
+        todoItemRepository.save(TodoItem.builder().title("Оформить командировку").build());
     }
 }
