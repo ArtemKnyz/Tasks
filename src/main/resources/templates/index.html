@@ -12,6 +12,16 @@
 </head>
 <body>
 <div class="container mt-5">
+    <form class="mb-3" th:action="@{/}" method="get">
+        <div class="input-group">
+            <input type="date"
+                   class="form-control"
+                   name="filterDate"
+                   th:value="${currentDate}">
+            <button class="btn btn-outline-primary" type="submit">Показать</button>
+            <a th:href="@{/}" class="btn btn-outline-secondary">Сброс</a>
+        </div>
+    </form>
     <h1 class="text-center">Список дел</h1>
     <form th:action="@{/add}" th:object="${newTodo}" method="post" class="mb-3">
         <div class="input-group mb-2">
